@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { specularColor } from 'three/src/nodes/core/PropertyNode.js';
-import { int } from 'three/src/nodes/tsl/TSLCore.js';
 
 export function sceneModule() { 
 // SCENE
@@ -29,6 +27,7 @@ const controls = new OrbitControls(camera, renderer.domElement); // ORBIT CONTRO
 controls.enableDamping = true;
 controls.dampingFactor = 0.03;
 
+/*
 // GEOMETRY & MESH
 const geo = new THREE.IcosahedronGeometry( 1.0, 20 );
 const mat = new THREE.MeshStandardMaterial(
@@ -62,4 +61,26 @@ scene.add(group);
 scene.add(hemiLight);
 
 return { scene, camera, renderer, controls, group}
+*/
+
+
+    // Particles
+// Geometry
+const particlesGeometry = new THREE.SphereGeometry(1, 100, 100); // Radius, width, height
+
+// Points
+const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.01, // Size of particles
+    sizeAttenuation: true, // Camera distance: camera = small particles and Close = big
+})
+
+const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particles);
+
+const group = new THREE.Group();
+group.add(particles);
+scene.add(group);
+
+return { scene, camera, renderer, controls, group}
 }
+
