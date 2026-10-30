@@ -1,13 +1,15 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { specularColor } from 'three/src/nodes/core/PropertyNode.js';
+import { int } from 'three/src/nodes/tsl/TSLCore.js';
 
 export function sceneModule() { 
 // SCENE
 const scene = new THREE.Scene() ;
 
+// RENDERER
 const w = window.innerWidth;
 const h = window.innerHeight;
-// RENDERER
 const renderer = new THREE.WebGLRenderer( { antialias: true } );
 renderer.setSize( w, h );
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -28,12 +30,13 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.03;
 
 // GEOMETRY & MESH
-const geo = new THREE.IcosahedronGeometry( 1.0, 2 );
+const geo = new THREE.IcosahedronGeometry( 1.0, 20 );
 const mat = new THREE.MeshStandardMaterial(
     { 
-    color: 0xccff00,
-    flatShading: true
+    color: 0x0000FF,
+    flatShading: true,
 });
+
 const mesh = new THREE.Mesh(geo, mat);
 
 const wireMat = new THREE.MeshBasicMaterial(
@@ -46,7 +49,10 @@ const wireMat = new THREE.MeshBasicMaterial(
 const wireMesh = new THREE.Mesh(geo, wireMat);
 wireMesh.scale.setScalar(1.001);
 
-const hemiLight = new THREE.HemisphereLight(0x0099ff, 0x000001);
+// LIGHTS
+const hemiLight = new THREE.SpotLight(0x0099ff, 0x000001);
+const intensity = 150;
+hemiLight.add(intensity);
 
 // GROUP
 const group = new THREE.Group();
