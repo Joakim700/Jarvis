@@ -31,7 +31,7 @@ controls.rotateSpeed = 0.5;
 
     // CENTER ORB - Particles
 // Geometry & Material
-const particlesGeometry = new THREE.SphereGeometry(1, 100, 100); // Radius, width, height
+const particlesGeometry = new THREE.SphereGeometry(1.1, 80, 50); // Radius, width, height
 const particlesMaterial = new THREE.PointsMaterial({
     size: 0.005, // Size of particles
     sizeAttenuation: true, // Camera distance: camera = small particles and Close = big
@@ -42,7 +42,7 @@ scene.add(particles);
 
     // Orb Ring: circle around {Center orb}
 // Geometry & Material
-const orbRingGeometry = new THREE.SphereGeometry(0.5);
+const orbRingGeometry = new THREE.SphereGeometry(1);
 const orbCircleMaterial = new THREE.MeshBasicMaterial({
     color: 0x0000FF
 })
